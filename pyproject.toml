@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "idaes-sdoe"
+version = "0.1.0"
+description = "Standalone Python APIs for sequential design of experiments."
+readme = "README.md"
+authors = [{name = "Xiangyu Bi", email = "xbi@lbl.gov"}]
+maintainers = [{name = "Xiangyu Bi", email = "xbi@lbl.gov"}]
+license = {file = "LICENSE.md"}
+requires-python = ">=3.10"
+dependencies = [
+  "kaleido>=0.2.1,<1",
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "plotly>=5.24",
+  "python-tsp>=0.5.0",
+  "scipy>=1.12",
+]
+
+[project.urls]
+Homepage = "https://github.com/lbibl/idaes-sdoe"
+Repository = "https://github.com/lbibl/idaes-sdoe"
+Issues = "https://github.com/lbibl/idaes-sdoe/issues"
+
+[project.optional-dependencies]
+docs = [
+  "pydata-sphinx-theme>=0.15",
+  "sphinx>=7.4",
+  "sphinx-copybutton>=0.5",
+]
+mars = ["sklearn-contrib-py-earth>=0.1.0"]
+notebook = [
+  "ipykernel>=6.29",
+  "notebook>=7.2",
+]
+dev = ["pytest>=8.0"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
