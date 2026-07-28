@@ -15,6 +15,7 @@
 .vscode/
 .idea/
 .jupyter_cache/
+__marimo__/
 __pycache__/
 *.pyc
 *.swp

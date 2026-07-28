@@ -1,7 +1,7 @@
 Concepts
 ========
 
-``idaes-sdoe`` is currently built around a small set of recurring SDoE concepts. These are
+``idaes-sdoe`` is currently built around a small set of recurring SDOE concepts. These are
 the main terms to understand before using the API.
 
 Candidate set

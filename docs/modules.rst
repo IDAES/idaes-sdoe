@@ -21,7 +21,7 @@ Model dataclasses
 -----------------
 
 The ``idaes_sdoe.models`` module defines the main API objects that correspond to
-the setup and results a user would inspect in an SDoE workflow.
+the setup and results a user would inspect in an SDOE workflow.
 
 ``ColumnRoles``
    Describes which table columns act as inputs, responses, weights, or an
@@ -53,6 +53,9 @@ the setup and results a user would inspect in an SDoE workflow.
 ``ResponseSurfaceValidation``
    Stores validation metrics and fitted-model state for response-surface
    fitting and imputation.
+
+Core modules
+------------
 
 ``idaes_sdoe.validation``
    Checks table structure, aligns previous data, inserts an index column when

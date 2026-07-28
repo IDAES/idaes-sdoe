@@ -9,7 +9,7 @@ SRC = ROOT / "src"
 sys.path.insert(0, str(SRC))
 
 project = "idaes-sdoe"
-author = "Xiangyu Bi"
+author = "Xiangyu Bi, Dan Gunter"
 copyright = (
     "2018-2026, The Regents of the University of California, through "
     "Lawrence Berkeley National Laboratory, National Technology & "
@@ -52,7 +52,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/lbibl/idaes-sdoe",
+            "url": "https://github.com/IDAES/idaes-sdoe",
             "icon": "fa-brands fa-square-github",
             "type": "fontawesome",
         }
@@ -60,7 +60,7 @@ html_theme_options = {
     "use_edit_page_button": True,
 }
 html_context = {
-    "github_user": "lbibl",
+    "github_user": "IDAES",
     "github_repo": "idaes-sdoe",
     "github_version": "main",
     "doc_path": "docs",

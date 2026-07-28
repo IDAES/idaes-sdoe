@@ -29,21 +29,50 @@ Optional extras:
 pip install -e ".[docs]"
 pip install -e ".[mars]"
 pip install -e ".[notebook]"
+pip install -e ".[marimo]"
 pip install -e ".[dev]"
 ```
 
 Use `docs` for local documentation builds, `mars` if you need the
-`method="mars"` response-surface option in imputation, `notebook` if you want
-the notebook stack managed with the project, and `dev` for the test stack.
-The `docs` extra installs Sphinx plus the HTML theme and code-block helpers
-used by the site.
+`method="mars"` response-surface option in imputation, `notebook` for Jupyter
+Notebook, `marimo` for the marimo notebook interface, and `dev` for the test
+stack. The `docs` extra installs Sphinx plus the HTML theme and code-block
+helpers used by the site.
 
-To use notebooks in the recommended Conda environment:
+### Notebook examples
+
+To install both notebook interfaces through the project extras:
 
 ```bash
 conda activate idaes-sdoe
-pip install -e ".[notebook]"
-jupyter notebook
+pip install -e ".[notebook,marimo]"
+```
+
+Alternatively, after installing the project, install either interface
+directly into the Conda environment:
+
+```bash
+conda activate idaes-sdoe
+conda install -c conda-forge notebook ipykernel
+conda install -c conda-forge marimo
+```
+
+Launch the Jupyter example with:
+
+```bash
+jupyter notebook examples/example-uniform-5d.ipynb
+```
+
+Open the interactive marimo editor with:
+
+```bash
+marimo edit examples/example-uniform-5d-marimo.py
+```
+
+To serve the marimo notebook as a non-editable application instead:
+
+```bash
+marimo run examples/example-uniform-5d-marimo.py
 ```
 
 To build the docs locally:
@@ -108,6 +137,7 @@ The main public surface is split across `idaes_sdoe`, `idaes_sdoe.design`,
 - `src/idaes_sdoe/design`: core design algorithms
 - `src/idaes_sdoe/extras`: candidate-generation and imputation helpers
 - `src/idaes_sdoe/plotting.py`: Plotly plotting helpers
+- `examples`: runnable Jupyter and marimo workflows
 - `tests`: standalone test suite
 
 ## License

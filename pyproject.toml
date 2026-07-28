@@ -7,8 +7,10 @@ name = "idaes-sdoe"
 version = "0.1.0"
 description = "Standalone Python APIs for sequential design of experiments."
 readme = "README.md"
-authors = [{name = "Xiangyu Bi", email = "xbi@lbl.gov"}]
-maintainers = [{name = "Xiangyu Bi", email = "xbi@lbl.gov"}]
+authors = [
+  {name = "Xiangyu Bi", email = "xbi@lbl.gov"},
+  {name = "Dan Gunter"},
+]
 license = {file = "LICENSE.md"}
 requires-python = ">=3.10"
 dependencies = [
@@ -21,9 +23,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/lbibl/idaes-sdoe"
-Repository = "https://github.com/lbibl/idaes-sdoe"
-Issues = "https://github.com/lbibl/idaes-sdoe/issues"
+Homepage = "https://github.com/IDAES/idaes-sdoe"
+Repository = "https://github.com/IDAES/idaes-sdoe"
+Issues = "https://github.com/IDAES/idaes-sdoe/issues"
 
 [project.optional-dependencies]
 docs = [
@@ -36,6 +38,7 @@ notebook = [
   "ipykernel>=6.29",
   "notebook>=7.2",
 ]
+marimo = ["marimo>=0.23.14"]
 dev = ["pytest>=8.0"]
 
 [tool.setuptools]

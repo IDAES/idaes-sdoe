@@ -1,8 +1,8 @@
 PSE-DoE Documentation
 =====================
 
-``idaes-sdoe`` is a  Python package for Design of Experiment in Process Systems Engineering. Currently it mainly provides tools for sequential design
-of experiments (sDoE).
+``idaes-sdoe`` is a Python package for Design of Experiments in Process Systems Engineering. Currently it mainly provides tools for sequential design
+of experiments (SDOE).
 
 This site combines workflow-oriented guides with an API reference generated
 from the package source.
