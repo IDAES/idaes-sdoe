@@ -1,7 +1,11 @@
 # idaes-sdoe
 
+[![Documentation Status](https://readthedocs.org/projects/idaes-sdoe/badge/?version=latest)](https://idaes-sdoe.readthedocs.io/en/latest/?badge=latest)
+
 `idaes-sdoe` is a Python package for design of experiments in process systems
 engineering.
+
+Documentation: https://idaes-sdoe.readthedocs.io
 
 `idaes-sdoe` is part of the IDAES integrated software platform, specifically
 the Institute for the Design of Advanced Energy Systems Process Systems

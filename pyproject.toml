@@ -24,6 +24,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://github.com/IDAES/idaes-sdoe"
+Documentation = "https://idaes-sdoe.readthedocs.io"
 Repository = "https://github.com/IDAES/idaes-sdoe"
 Issues = "https://github.com/IDAES/idaes-sdoe/issues"
 
