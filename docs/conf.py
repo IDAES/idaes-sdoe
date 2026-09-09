@@ -29,6 +29,7 @@ extensions: list[str] = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
     "sphinx_copybutton",
+    "sphinx_marimo",
 ]
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
@@ -38,12 +39,19 @@ autodoc_typehints = "description"
 napoleon_google_docstring = True
 napoleon_numpy_docstring = False
 
-html_theme = "pydata_sphinx_theme"
+#html_theme = "pydata_sphinx_theme"
+html_theme = "sphinx_book_theme"
 html_title = f"{project} {release}"
 html_static_path = ["_static"]
 html_css_files = ["css/custom.css"]
+html_sidebars = {
+    "**": ["sbt-sidebar-nav.html"]
+}
 html_show_sourcelink = False
 html_theme_options = {
+    # Keep the header focused on the project identity and search. The complete
+    # documentation tree belongs in the persistent primary sidebar.
+    "navbar_center": [],
     "show_prev_next": True,
     "show_nav_level": 2,
     "navigation_with_keys": True,
@@ -65,3 +73,18 @@ html_context = {
     "github_version": "main",
     "doc_path": "docs",
 }
+# Marimo config
+# Optional configuration
+marimo_notebook_dir = 'notebooks'  # Directory containing .py Marimo notebooks
+marimo_default_height = '600px'
+marimo_default_width = '100%'
+
+# Parallel build and caching (default values shown)
+marimo_parallel_build = True       # Enable parallel notebook building
+marimo_n_jobs = -1                  # Number of parallel jobs (-1 = auto-detect CPU cores)
+marimo_cache_notebooks = True       # Enable caching to speed up repeated builds
+
+# Click-to-load configuration (multiple modes available)
+marimo_click_to_load = True        # Options: False, True/"overlay", "compact"
+marimo_load_button_text = "Load Interactive Notebook"
+
