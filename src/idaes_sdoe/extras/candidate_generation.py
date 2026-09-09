@@ -12,6 +12,7 @@
 # #################################################################################
 from __future__ import annotations
 
+from math import isqrt
 from pathlib import Path
 
 import numpy as np
@@ -100,6 +101,42 @@ def _distribution(spec: InputSpec):
     raise ConfigurationError(f"Unsupported distribution '{spec.distribution}'.")
 
 
+def _is_prime(value: int) -> bool:
+    """Return whether a positive integer is prime."""
+    if value < 2:
+        return False
+    if value % 2 == 0:
+        return value == 2
+    divisor = 3
+    while divisor * divisor <= value:
+        if value % divisor == 0:
+            return False
+        divisor += 2
+    return True
+
+
+def _nearest_oa_sizes(num_samples: int, dimension: int) -> tuple[int | None, int | None]:
+    """Return the closest valid orthogonal-array sizes around ``num_samples``.
+
+    A strength-2 orthogonal-array design requires ``num_samples == p ** 2`` for a
+    prime ``p`` with ``dimension <= p + 1``. Returns the largest valid size at or
+    below ``num_samples`` and the smallest valid size above it; ``below`` is
+    ``None`` when no valid size is small enough for the requested dimension.
+    """
+    below: int | None = None
+    above: int | None = None
+    prime = 2
+    while above is None:
+        if _is_prime(prime) and prime + 1 >= dimension:
+            size = prime * prime
+            if size <= num_samples:
+                below = size
+            else:
+                above = size
+        prime += 1
+    return below, above
+
+
 def _unit_samples(
     dimension: int,
     num_samples: int,
@@ -128,6 +165,21 @@ def _unit_samples(
         sampler = qmc.LatinHypercube(d=dimension, seed=random_state)
         return sampler.random(num_samples)
     if scheme == "orthogonal_array":
+        prime = isqrt(num_samples)
+        is_valid = (
+            prime * prime == num_samples
+            and _is_prime(prime)
+            and dimension <= prime + 1
+        )
+        if not is_valid:
+            below, above = _nearest_oa_sizes(num_samples, dimension)
+            nearest = ", ".join(str(size) for size in (below, above) if size is not None)
+            raise ConfigurationError(
+                "The 'orthogonal_array' scheme requires num_samples to be the square "
+                "of a prime p with dimension <= p + 1. "
+                f"num_samples={num_samples} with dimension={dimension} is not valid; "
+                f"nearest valid sizes: {nearest}."
+            )
         sampler = qmc.LatinHypercube(d=dimension, strength=2, seed=random_state)
         return sampler.random(num_samples)
     if scheme == "metis":
@@ -151,8 +203,16 @@ def generate_candidates(
     Args:
         specs: Input specifications describing bounds, defaults, and optional
             distributions.
-        num_samples: Number of candidate rows to generate.
-        scheme: Sampling scheme used on the unit hypercube.
+        num_samples: Number of candidate rows to generate. For
+            ``scheme="orthogonal_array"`` this must be the square of a prime
+            ``p`` with the number of variable inputs at most ``p + 1`` (for
+            example 9, 25, or 49); other values raise ``ConfigurationError``
+            listing the nearest valid sizes.
+        scheme: Sampling scheme used on the unit hypercube. One of
+            ``"monte_carlo"``, ``"quasi_monte_carlo"`` (alias ``"sobol"``),
+            ``"latin_hypercube"``, ``"orthogonal_array"``, or ``"metis"``.
+            These are SciPy-based implementations and are not identical to the
+            PSUADE samplers used by the FOQUS GUI.
         random_state: Optional random seed.
 
     Returns:

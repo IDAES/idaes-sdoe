@@ -76,6 +76,35 @@ Candidate generation can be used before any design search:
 * ``specs_from_previous()`` infers bounds from existing data.
 * ``generate_candidates()`` produces a new candidate table from those specs.
 
+A minimal example:
+
+.. code-block:: python
+
+   from idaes_sdoe import InputSpec
+   from idaes_sdoe.extras import generate_candidates
+
+   specs = [
+       InputSpec(name="X1", lower=0.0, upper=1.0),
+       InputSpec(name="X2", lower=-1.0, upper=1.0),
+   ]
+   result = generate_candidates(specs, num_samples=100, scheme="latin_hypercube")
+   result.samples.head()
+
+Available schemes are ``monte_carlo``, ``quasi_monte_carlo`` (alias ``sobol``),
+``latin_hypercube``, ``orthogonal_array``, and ``metis``. These are SciPy-based
+and are not identical to the PSUADE samplers used by the FOQUS GUI, so the
+generated points will differ from FOQUS even though the sampling families match.
+
+The ``orthogonal_array`` scheme requires ``num_samples`` to be the square of a
+prime ``p`` with the number of variable inputs at most ``p + 1`` (for example
+9, 25, or 49). Other sizes raise ``ConfigurationError`` naming the nearest valid
+values, so the request fails clearly instead of returning an unexpected number
+of rows::
+
+   generate_candidates(specs, num_samples=20, scheme="orthogonal_array")
+   # ConfigurationError: The 'orthogonal_array' scheme requires num_samples to
+   # be the square of a prime p ... nearest valid sizes: 9, 25.
+
 Imputation workflow
 -------------------
 
