@@ -145,5 +145,6 @@ def scale_weights(values: np.ndarray, *, method: str, mwr: int) -> np.ndarray:
     lower = np.min(scaled)
     upper = np.max(scaled)
     if lower == upper:
-        return np.ones_like(scaled, dtype=float)
+        # Equal weights: leave them unchanged, matching FOQUS nusf.scale_y.
+        return scaled
     return 1.0 + (mwr - 1.0) * (scaled - lower) / (upper - lower)

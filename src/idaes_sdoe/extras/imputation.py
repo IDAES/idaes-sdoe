@@ -18,7 +18,6 @@ from itertools import combinations_with_replacement
 
 import numpy as np
 import pandas as pd
-from scipy.interpolate import RBFInterpolator
 
 from ..exceptions import OptionalDependencyError
 from ..models import ResponseSurfaceValidation
@@ -71,23 +70,6 @@ class _LeastSquaresModel:
         return features @ self.coefficients
 
 
-@dataclass
-class _RbfModel:
-    interpolator: RBFInterpolator | None = None
-
-    def fit(self, x: np.ndarray, y: np.ndarray) -> "_RbfModel":
-        """Fit a radial-basis interpolator to observed data."""
-        self.interpolator = RBFInterpolator(x, y, kernel="gaussian")
-        return self
-
-    def predict(self, x: np.ndarray) -> np.ndarray:
-        """Predict responses with the fitted radial-basis interpolator."""
-        if self.interpolator is None:
-            raise RuntimeError("Model has not been fit.")
-        values = self.interpolator(x)
-        return np.asarray(values).reshape(-1)
-
-
 def _surface_model(method: str):
     """Build the response-surface model requested by name."""
     if method == "linear":
@@ -96,8 +78,6 @@ def _surface_model(method: str):
         return _LeastSquaresModel(degree=2)
     if method == "cubic":
         return _LeastSquaresModel(degree=3)
-    if method == "gaussian_process":
-        return _RbfModel()
     if method == "mars":
         try:
             from pyearth import Earth
