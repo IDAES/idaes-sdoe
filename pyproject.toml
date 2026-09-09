@@ -33,6 +33,8 @@ docs = [
   "pydata-sphinx-theme>=0.15",
   "sphinx>=7.4",
   "sphinx-copybutton>=0.5",
+  "sphinx-marimo",
+  "sphinx-book-theme",
 ]
 mars = ["sklearn-contrib-py-earth>=0.1.0"]
 notebook = [
