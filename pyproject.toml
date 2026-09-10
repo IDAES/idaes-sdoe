@@ -33,6 +33,8 @@ docs = [
   "pydata-sphinx-theme>=0.15",
   "sphinx>=7.4",
   "sphinx-copybutton>=0.5",
+  "sphinx-marimo",
+  "sphinx-book-theme",
 ]
 mars = ["sklearn-contrib-py-earth>=0.1.0"]
 notebook = [
@@ -41,6 +43,11 @@ notebook = [
 ]
 marimo = ["marimo>=0.23.14"]
 dev = ["pytest>=8.0"]
+
+# everything needed for dev
+all-dev = [ 
+  "idaes-sdoe[docs,notebook,marimo,dev]",
+]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
