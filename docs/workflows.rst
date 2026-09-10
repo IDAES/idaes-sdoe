@@ -91,9 +91,7 @@ A minimal example:
    result.samples.head()
 
 Available schemes are ``monte_carlo``, ``quasi_monte_carlo`` (alias ``sobol``),
-``latin_hypercube``, ``orthogonal_array``, and ``metis``. These are SciPy-based
-and are not identical to the PSUADE samplers used by the FOQUS GUI, so the
-generated points will differ from FOQUS even though the sampling families match.
+``latin_hypercube``, and ``orthogonal_array``.
 
 The ``orthogonal_array`` scheme requires ``num_samples`` to be the square of a
 prime ``p`` with the number of variable inputs at most ``p + 1`` (for example

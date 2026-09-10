@@ -128,7 +128,7 @@ def test_orthogonal_array_reproducible():
 # sibling schemes
 
 @pytest.mark.parametrize(
-    "scheme", ["monte_carlo", "quasi_monte_carlo", "sobol", "latin_hypercube", "metis"]
+    "scheme", ["monte_carlo", "quasi_monte_carlo", "sobol", "latin_hypercube"]
 )
 def test_other_schemes_shape_and_bounds(scheme):
     result = generate_candidates(_variable_specs(3), num_samples=16, scheme=scheme, random_state=11)

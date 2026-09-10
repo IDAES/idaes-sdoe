@@ -17,7 +17,6 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from scipy.cluster.vq import kmeans2
 from scipy import stats
 from scipy.stats import qmc
 
@@ -182,12 +181,6 @@ def _unit_samples(
             )
         sampler = qmc.LatinHypercube(d=dimension, strength=2, seed=random_state)
         return sampler.random(num_samples)
-    if scheme == "metis":
-        rng = np.random.default_rng(random_state)
-        pool_size = max(1024, num_samples * 16)
-        pool = rng.random((pool_size, dimension))
-        centers, _labels = kmeans2(pool, num_samples, minit="points")
-        return np.clip(centers, 0.0, 1.0)
     raise ConfigurationError(f"Unsupported sampling scheme '{scheme}'.")
 
 
@@ -210,9 +203,7 @@ def generate_candidates(
             listing the nearest valid sizes.
         scheme: Sampling scheme used on the unit hypercube. One of
             ``"monte_carlo"``, ``"quasi_monte_carlo"`` (alias ``"sobol"``),
-            ``"latin_hypercube"``, ``"orthogonal_array"``, or ``"metis"``.
-            These are SciPy-based implementations and are not identical to the
-            PSUADE samplers used by the FOQUS GUI.
+            ``"latin_hypercube"``, or ``"orthogonal_array"``.
         random_state: Optional random seed.
 
     Returns:
