@@ -44,6 +44,11 @@ notebook = [
 marimo = ["marimo>=0.23.14"]
 dev = ["pytest>=8.0"]
 
+# everything needed for dev
+all-dev = [ 
+  "idaes-sdoe[docs,notebook,marimo,dev]",
+]
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
