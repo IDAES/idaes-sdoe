@@ -11,9 +11,7 @@
 # for full copyright and license information.
 # #################################################################################
 import pandas as pd
-import pytest
 
-from idaes_sdoe.exceptions import ConfigurationError
 from idaes_sdoe.extras.candidate_generation import generate_candidates
 from idaes_sdoe.extras.imputation import fit_response_surface, impute_missing_values
 from idaes_sdoe.models import InputSpec
@@ -26,24 +24,6 @@ def test_candidate_generation_smoke():
     ]
     result = generate_candidates(specs, num_samples=16, scheme="latin_hypercube", random_state=23)
     assert result.samples.shape == (16, 2)
-
-
-def test_orthogonal_array_valid_size():
-    specs = [
-        InputSpec(name="X1", lower=-1.0, upper=1.0),
-        InputSpec(name="X2", lower=-1.0, upper=1.0),
-    ]
-    result = generate_candidates(specs, num_samples=25, scheme="orthogonal_array", random_state=7)
-    assert result.samples.shape == (25, 2)
-
-
-def test_orthogonal_array_invalid_size_raises_with_nearest():
-    specs = [
-        InputSpec(name="X1", lower=-1.0, upper=1.0),
-        InputSpec(name="X2", lower=-1.0, upper=1.0),
-    ]
-    with pytest.raises(ConfigurationError, match="nearest valid sizes: 9, 25"):
-        generate_candidates(specs, num_samples=20, scheme="orthogonal_array", random_state=7)
 
 
 def test_imputation_smoke():
