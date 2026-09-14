@@ -34,7 +34,6 @@ docs = [
   "sphinx>=7.4",
   "sphinx-copybutton>=0.5",
 ]
-mars = ["sklearn-contrib-py-earth>=0.1.0"]
 notebook = [
   "ipykernel>=6.29",
   "notebook>=7.2",

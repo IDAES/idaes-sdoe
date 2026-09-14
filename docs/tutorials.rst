@@ -114,3 +114,33 @@ manual-entry option can be used for a different candidate table.
 The configurable session artifact directory appears near the top of the
 interface. It defaults to a timestamped directory under
 ``examples/temp/marimo_output``.
+
+Non-uniform space-filling (Jupyter)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`examples/example-nonuniform.ipynb
+<https://github.com/IDAES/idaes-sdoe/blob/main/examples/example-nonuniform.ipynb>`__
+builds a 20-run non-uniform space-filling design on a two-dimensional weighted
+candidate grid and compares several maximum-weight-ratio (MWR) values. The
+candidate set is generated inside the notebook, so no supporting file is needed.
+
+**Launch:**
+
+.. code-block:: bash
+
+   jupyter notebook examples/example-nonuniform.ipynb
+
+Input-response space-filling (Jupyter)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`examples/example-input-response.ipynb
+<https://github.com/IDAES/idaes-sdoe/blob/main/examples/example-input-response.ipynb>`__
+builds an input-response space-filling design and returns a Pareto front of
+designs that trade off coverage in the input and response spaces. The candidate
+set is generated inside the notebook.
+
+**Launch:**
+
+.. code-block:: bash
+
+   jupyter notebook examples/example-input-response.ipynb

@@ -31,17 +31,15 @@ Optional extras:
 
 ```bash
 pip install -e ".[docs]"
-pip install -e ".[mars]"
 pip install -e ".[notebook]"
 pip install -e ".[marimo]"
 pip install -e ".[dev]"
 ```
 
-Use `docs` for local documentation builds, `mars` if you need the
-`method="mars"` response-surface option in imputation, `notebook` for Jupyter
-Notebook, `marimo` for the marimo notebook interface, and `dev` for the test
-stack. The `docs` extra installs Sphinx plus the HTML theme and code-block
-helpers used by the site.
+Use `docs` for local documentation builds, `notebook` for Jupyter Notebook,
+`marimo` for the marimo notebook interface, and `dev` for the test stack. The
+`docs` extra installs Sphinx plus the HTML theme and code-block helpers used by
+the site.
 
 ### Notebook examples
 

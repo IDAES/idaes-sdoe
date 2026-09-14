@@ -158,6 +158,29 @@ class InputResponseDesignResult:
 
 
 @dataclass(frozen=True)
+class MaxProDesignResult:
+    """Result of a maximum-projection (MaxPro) design.
+
+    Attributes:
+        design: Generated or selected design rows in original units.
+        criterion_value: MaxPro criterion of the design on the unit hypercube
+            (lower is better).
+        design_size: Number of rows in the design.
+        mode: Design criterion used, ``"maxpro"``.
+        elapsed_time: Runtime in seconds.
+        selected_indices: Candidate identifiers chosen when augmenting previous
+            data; ``None`` for from-scratch generation.
+    """
+
+    design: pd.DataFrame
+    criterion_value: float
+    design_size: int
+    mode: str
+    elapsed_time: float
+    selected_indices: list[Any] | None = None
+
+
+@dataclass(frozen=True)
 class RunOrderResult:
     """Result of reordering a design for execution.
 

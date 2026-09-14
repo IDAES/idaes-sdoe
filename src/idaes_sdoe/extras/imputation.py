@@ -75,9 +75,9 @@ class _MarsModel:
     Native NumPy implementation of the MARS method. A forward pass greedily adds
     pairs of hinge basis functions ``max(0, +/-(x - knot))``; a backward pass
     then removes terms to minimize the generalized cross-validation (GCV) score.
-    Defaults mirror the MARS settings used by PSUADE: up to ``max_terms`` basis
-    functions and interaction degree ``min(n_inputs, 8)``. No external
-    dependency is required.
+    Defaults follow common MARS settings: up to ``max_terms`` basis functions
+    and interaction degree ``min(n_inputs, 8)``. No external dependency is
+    required.
     """
 
     def __init__(self, max_terms: int = 100, max_degree: int | None = None, penalty: float = 3.0) -> None:

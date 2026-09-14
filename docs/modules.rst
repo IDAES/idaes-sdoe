@@ -41,6 +41,9 @@ the setup and results a user would inspect in an SDOE workflow.
 ``InputResponseDesignResult``
    Stores the IRSF Pareto front and the corresponding design tables.
 
+``MaxProDesignResult``
+   Stores a maximum-projection design and its criterion value.
+
 ``RunOrderResult``
    Stores the reordered execution sequence for a chosen design.
 
@@ -70,7 +73,7 @@ Core modules
 
 ``idaes_sdoe.ordering``
    Post-processes a chosen design into a run order using either an exact TSP
-   solver or a greedy fallback.
+   solver or a greedy fallback, or by blocking on hard-to-change factors.
 
 ``idaes_sdoe.plotting``
    Compact Plotly figures for pairwise design views, weight diagnostics, and
@@ -100,6 +103,9 @@ Design modules
 ``idaes_sdoe.design.input_response``
    Input-response space-filling search that returns a Pareto front of
    trade-off designs.
+
+``idaes_sdoe.design.maxpro``
+   Maximum-projection design generation and candidate augmentation.
 
 Support modules
 ---------------
@@ -131,6 +137,7 @@ Each design family returns a dedicated result dataclass from
 * ``UniformDesignResult``
 * ``NonUniformDesignResult``
 * ``InputResponseDesignResult``
+* ``MaxProDesignResult``
 * ``RunOrderResult``
 
 These results carry the selected design rows plus the criterion values and

@@ -44,6 +44,10 @@ Input-response space filling
    Builds a Pareto front of designs that trade off coverage in the input space
    against coverage in the response space.
 
+Maximum projection (MaxPro)
+   Generates a design whose projections onto every subset of factors are well
+   spread, and can augment previous data by selecting candidate points.
+
 What lives outside the core
 ---------------------------
 

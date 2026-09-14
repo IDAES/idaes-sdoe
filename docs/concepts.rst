@@ -87,6 +87,11 @@ Input-response space filling
    Balances coverage in the input space and response space, and returns a
    Pareto front of trade-off designs.
 
+Maximum projection (MaxPro)
+   Minimizes the average reciprocal product of coordinate distances so that
+   projections onto every subset of factors remain well spread (lower is
+   better).
+
 Result objects
 --------------
 

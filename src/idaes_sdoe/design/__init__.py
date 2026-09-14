@@ -11,15 +11,18 @@
 # for full copyright and license information.
 # #################################################################################
 from .input_response import design_input_response, estimate_input_response_runtime
+from .maxpro import design_maxpro, maxpro_criterion
 from .nonuniform import design_nonuniform, estimate_nonuniform_runtime
 from .uniform import design_uniform, design_uniform_batch, estimate_uniform_runtime
 
 __all__ = [
     "design_input_response",
+    "design_maxpro",
     "design_nonuniform",
     "design_uniform",
     "design_uniform_batch",
     "estimate_input_response_runtime",
     "estimate_nonuniform_runtime",
     "estimate_uniform_runtime",
+    "maxpro_criterion",
 ]

@@ -67,6 +67,22 @@ Typical role configuration:
 
 Runtime estimates can be obtained with ``estimate_input_response_runtime()``.
 
+MaxPro workflow
+---------------
+
+The maximum-projection path builds a design with well-spread low-dimensional
+projections:
+
+1. Load or define the candidate table (its input columns set the ranges).
+2. Mark inputs in ``ColumnRoles``.
+3. Build a ``DesignSetup``.
+4. Call ``design_maxpro()``.
+5. Inspect ``result.design`` and ``result.criterion_value`` (lower is better).
+
+Without previous data a design is generated over the input ranges. When
+previous data is supplied, ``design_maxpro()`` instead selects candidate points
+that best augment it.
+
 Candidate generation workflow
 -----------------------------
 
@@ -124,3 +140,7 @@ Run ordering is a post-processing step applied after a design has been chosen.
 3. Call ``order_runs()``.
 
 The result contains both the original design and the reordered table.
+
+When some input factors are hard to change, ``order_runs_by_difficulty()``
+orders the design to keep those factors changing as infrequently as possible,
+falling back to the travelling-salesperson order when every input is hard.
