@@ -10,10 +10,11 @@
 # All rights reserved. Please see the files COPYRIGHT.md and LICENSE.md
 # for full copyright and license information.
 # #################################################################################
+import numpy as np
 import pandas as pd
 
 from idaes_sdoe.extras.candidate_generation import generate_candidates
-from idaes_sdoe.extras.imputation import fit_response_surface, impute_missing_values
+from idaes_sdoe.extras.imputation import _MarsModel, fit_response_surface, impute_missing_values
 from idaes_sdoe.models import InputSpec
 
 
@@ -51,3 +52,44 @@ def test_imputation_smoke():
     assert validation.rmse >= 0
     assert not imputed["Y"].isna().any()
     assert "Y" in reports
+
+
+def test_mars_recovers_hinge_function():
+    # Ground truth: a single hinge. MARS should recover it near-perfectly.
+    x = np.linspace(0.0, 1.0, 60)
+    frame = pd.DataFrame({"x": x, "y": 3.0 * np.maximum(0.0, x - 0.5)})
+    validation = fit_response_surface(
+        frame, input_columns=["x"], target_column="y", method="mars", random_state=1
+    )
+    assert validation.r2 > 0.99
+
+
+def test_mars_fits_linear_function():
+    # MARS can represent a linear surface via complementary hinge pairs.
+    rng = np.random.default_rng(0)
+    x1 = rng.random(50)
+    x2 = rng.random(50)
+    frame = pd.DataFrame({"x1": x1, "x2": x2, "y": 2.0 * x1 - x2 + 0.5})
+    validation = fit_response_surface(
+        frame, input_columns=["x1", "x2"], target_column="y", method="mars", random_state=1
+    )
+    assert validation.r2 > 0.99
+
+
+def test_mars_prediction_is_deterministic():
+    x = np.linspace(0.0, 1.0, 40).reshape(-1, 1)
+    y = 3.0 * np.maximum(0.0, x[:, 0] - 0.5)
+    first = _MarsModel().fit(x, y).predict(x)
+    second = _MarsModel().fit(x, y).predict(x)
+    assert np.allclose(first, second)
+
+
+def test_mars_imputes_missing_values():
+    x = np.linspace(0.0, 1.0, 20)
+    frame = pd.DataFrame({"x": x, "y": x**2})
+    frame.loc[[5, 10, 15], "y"] = np.nan
+    imputed, reports = impute_missing_values(
+        frame, input_columns=["x"], target_columns="y", method="mars", random_state=2
+    )
+    assert not imputed["y"].isna().any()
+    assert "y" in reports
