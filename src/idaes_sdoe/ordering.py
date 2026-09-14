@@ -84,3 +84,58 @@ def order_runs(
         path_length=path_length(ordered_scaled),
         method=method,
     )
+
+
+def order_runs_by_difficulty(
+    design: pd.DataFrame,
+    *,
+    input_columns: list[str],
+    hard_columns: list[str],
+    bounds: dict[str, tuple[float, float]] | None = None,
+    exact: bool = True,
+) -> RunOrderResult:
+    """Order design rows according to which factors are hard to change.
+
+    The run order is selected from the hard-to-change factors:
+
+    * every input hard -> travelling-salesperson ordering (``order_runs``);
+    * some inputs hard -> block ordering that sorts by the hard-to-change
+      columns so those factors change as infrequently as possible;
+    * no inputs hard -> the original row order is kept.
+
+    Args:
+        design: Design table to reorder.
+        input_columns: Columns that define movement cost for the TSP path.
+        hard_columns: Input columns that are hard to change, most-significant
+            first.
+        bounds: Optional scaling bounds used for the reported path length.
+        exact: Passed to ``order_runs`` when every input is hard.
+
+    Returns:
+        Run-order result with the reordered design, permutation, path length,
+        and the method used (``"tsp-*"``, ``"difficulty-blocks"``, or
+        ``"original"``).
+    """
+    hard = [column for column in hard_columns if column in input_columns]
+    if hard and set(hard) >= set(input_columns):
+        return order_runs(design, input_columns=input_columns, bounds=bounds, exact=exact)
+
+    work = design.reset_index(drop=True)
+    if hard:
+        permutation = work.sort_values(hard, kind="stable").index.to_list()
+        method = "difficulty-blocks"
+    else:
+        permutation = list(range(len(work)))
+        method = "original"
+
+    ordered = work.iloc[permutation].reset_index(drop=True)
+    if bounds is None:
+        bounds = build_bounds(design, None, input_columns)
+    scaled = scale_columns(ordered[input_columns], columns=input_columns, bounds=bounds)
+    return RunOrderResult(
+        design=design.copy(),
+        ordered_design=ordered,
+        permutation=[int(position) for position in permutation],
+        path_length=path_length(scaled.to_numpy()),
+        method=method,
+    )
