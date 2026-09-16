@@ -1449,14 +1449,11 @@ def _(mo):
     mo.md(r"""
     # Interactive uniform space-filling design in 5D
 
-    This marimo notebook serves as a UI for running a sDOE example with uniform sampling in a 5D input space. It reproduces the carbon-capture
-    USF-3 workflow while making the data, column roles, scaling bounds,
-    search budget, criterion, random seed, first-stage choice, and
-    augmentation settings interactive.
-
-    The workflow follows the
-    [FOQUS USF-3 reference](https://foqus.readthedocs.io/en/stable/chapt_sdoe/examples-uniform.html#example-usf-3-a-uniform-space-filling-design-for-a-carbon-capture-example-in-a-5-d-input-space)
-    while using the current `idaes-sdoe` API throughout.
+    This marimo notebook is an interactive UI for a two-stage uniform
+    space-filling design over a 5D carbon-capture input space. It makes the
+    data, column roles, scaling bounds, search budget, criterion, random seed,
+    first-stage choice, and augmentation settings interactive, using the
+    `idaes-sdoe` API throughout.
 
     **Guided path:** load data → inspect the viable region → generate and
     compare Stage 1 designs → choose completed runs → add Stage 2 runs →

@@ -120,9 +120,13 @@ Non-uniform space-filling (Jupyter)
 
 `examples/example-nonuniform.ipynb
 <https://github.com/IDAES/idaes-sdoe/blob/main/examples/example-nonuniform.ipynb>`__
-builds a 20-run non-uniform space-filling design on a two-dimensional weighted
-candidate grid and compares several maximum-weight-ratio (MWR) values. The
-candidate set is generated inside the notebook, so no supporting file is needed.
+builds a 20-run non-uniform space-filling design on a
+2-D weighted candidate grid, using Direct scaling and comparing maximum-weight-
+ratio (MWR) values of 5, 10, and 30, with closest-distance-by-weight (CDBW) and
+pairwise plots for each.
+
+**Supporting data:**
+``examples/supporting_data/NUSFex1.csv``; the notebook loads it automatically.
 
 **Launch:**
 
@@ -130,14 +134,37 @@ candidate set is generated inside the notebook, so no supporting file is needed.
 
    jupyter notebook examples/example-nonuniform.ipynb
 
+Non-uniform space-filling, 4-D carbon capture (Jupyter)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`examples/example-nonuniform-4d.ipynb
+<https://github.com/IDAES/idaes-sdoe/blob/main/examples/example-nonuniform-4d.ipynb>`__
+builds a 10-run non-uniform space-filling design over a
+4-input carbon-capture space, comparing Direct vs Ranked weight scaling at MWR
+values of 2 and 5, with CDBW and pairwise plots.
+
+**Supporting data:**
+``examples/supporting_data/SDoE_CCSI_example.csv``; the notebook loads it
+automatically.
+
+**Launch:**
+
+.. code-block:: bash
+
+   jupyter notebook examples/example-nonuniform-4d.ipynb
+
 Input-response space-filling (Jupyter)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 `examples/example-input-response.ipynb
 <https://github.com/IDAES/idaes-sdoe/blob/main/examples/example-input-response.ipynb>`__
-builds an input-response space-filling design and returns a Pareto front of
-designs that trade off coverage in the input and response spaces. The candidate
-set is generated inside the notebook.
+builds a 20-run input-response space-filling
+design over a 2-D grid with a single response, then walks the Pareto front and
+compares the best-input, best-response, and compromise designs.
+
+**Supporting data:**
+``examples/supporting_data/irsf-example1-candset.csv``; the notebook loads it
+automatically.
 
 **Launch:**
 
