@@ -77,18 +77,6 @@ To serve the marimo notebook as a non-editable application instead:
 marimo run examples/example-uniform-5d-marimo.py
 ```
 
-To build the docs locally:
-
-```bash
-conda activate idaes-sdoe
-pip install -e ".[docs]"
-python -m sphinx -b html docs docs/_build/html
-open docs/_build/html/index.html
-```
-
-On systems without `open`, open `docs/_build/html/index.html` in a browser
-directly.
-
 ## Quick start
 
 The example below uses a bundled candidate set from the repository.
@@ -141,6 +129,31 @@ The main public surface is split across `idaes_sdoe`, `idaes_sdoe.design`,
 - `src/idaes_sdoe/plotting.py`: Plotly plotting helpers
 - `examples`: runnable Jupyter and marimo workflows
 - `tests`: standalone test suite
+
+## Development
+
+Set up a development environment with the test and documentation extras:
+
+```bash
+conda create -n idaes-sdoe python=3.11
+conda activate idaes-sdoe
+pip install -e ".[dev,docs]"
+```
+
+Run the test suite:
+
+```bash
+pytest
+```
+
+Build the documentation locally:
+
+```bash
+python -m sphinx -b html docs docs/_build/html
+```
+
+Then open `docs/_build/html/index.html` in a browser (on macOS,
+`open docs/_build/html/index.html`).
 
 ## License
 
