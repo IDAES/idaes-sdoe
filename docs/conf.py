@@ -11,10 +11,11 @@ sys.path.insert(0, str(SRC))
 project = "idaes-sdoe"
 author = "Xiangyu Bi, Dan Gunter"
 copyright = (
-    "2018-2026, The Regents of the University of California, through "
-    "Lawrence Berkeley National Laboratory, National Technology & "
-    "Engineering Solutions of Sandia, LLC, Carnegie Mellon University, "
-    "West Virginia University Research Corporation, et al."
+    "2018-2026 by the software owners: The Regents of the University of "
+    "California, through Lawrence Berkeley National Laboratory, National "
+    "Technology & Engineering Solutions of Sandia, LLC, Carnegie Mellon "
+    "University, West Virginia University Research Corporation, et al. "
+    "All rights reserved."
 )
 
 try:
