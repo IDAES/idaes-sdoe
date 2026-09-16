@@ -245,7 +245,9 @@ def fit_response_surface(
         frame: Source table containing inputs and target values.
         input_columns: Input columns used by the surface model.
         target_column: Target column to model.
-        method: Response-surface method name.
+        method: Response-surface method: one of ``"linear"``, ``"quadratic"``,
+            ``"cubic"``, or ``"mars"`` (MARS is built in; no extra install
+            needed).
         cv_splits: Number of cross-validation folds.
         random_state: Optional seed for fold shuffling.
 
@@ -287,7 +289,9 @@ def impute_missing_values(
         frame: Source table containing missing target values.
         input_columns: Input columns supplied to each response-surface model.
         target_columns: One target column or a sequence of target columns.
-        method: Response-surface method name.
+        method: Response-surface method: one of ``"linear"``, ``"quadratic"``,
+            ``"cubic"``, or ``"mars"`` (MARS is built in; no extra install
+            needed).
         random_state: Optional seed for model validation shuffling.
 
     Returns:

@@ -128,7 +128,8 @@ When weight or response columns are incomplete:
 2. Call ``fit_response_surface()`` to inspect model quality.
 3. Call ``impute_missing_values()`` to fill the missing entries.
 
-The imputation code is intentionally compact and model-light.
+The available ``method`` values are ``"linear"``, ``"quadratic"``, ``"cubic"``,
+and ``"mars"``. All are built in and need no extra install.
 
 Run ordering workflow
 ---------------------
