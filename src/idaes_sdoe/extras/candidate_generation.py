@@ -84,9 +84,10 @@ def _distribution(spec: InputSpec):
     if spec.distribution == "uniform":
         return stats.uniform(loc=spec.lower, scale=spec.upper - spec.lower)
     if spec.distribution == "normal":
-        return stats.norm(loc=parameters.get("mean", spec.default or (spec.lower + spec.upper) / 2), scale=parameters["sd"])
+        default_mean = spec.default if spec.default is not None else (spec.lower + spec.upper) / 2
+        return stats.norm(loc=parameters.get("mean", default_mean), scale=parameters["sd"])
     if spec.distribution == "lognormal":
-        return stats.lognorm(s=parameters["sigma"], scale=np.exp(parameters["mean"]))
+        return stats.lognorm(s=parameters["sigma"], loc=spec.lower, scale=np.exp(parameters["mean"]))
     if spec.distribution == "triangular":
         peak = parameters["mode"]
         c = (peak - spec.lower) / (spec.upper - spec.lower)
@@ -94,9 +95,9 @@ def _distribution(spec: InputSpec):
     if spec.distribution == "beta":
         return stats.beta(a=parameters["a"], b=parameters["b"], loc=spec.lower, scale=spec.upper - spec.lower)
     if spec.distribution == "gamma":
-        return stats.gamma(a=parameters["shape"], scale=parameters["scale"])
+        return stats.gamma(a=parameters["shape"], loc=spec.lower, scale=parameters["scale"])
     if spec.distribution == "exponential":
-        return stats.expon(scale=parameters["scale"])
+        return stats.expon(loc=spec.lower, scale=parameters["scale"])
     raise ConfigurationError(f"Unsupported distribution '{spec.distribution}'.")
 
 
