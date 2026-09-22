@@ -13,7 +13,14 @@ Engineering Framework (IDAES PSE Framework).
 
 ## Install
 
-Recommended setup: Conda environment
+Install from source with an editable install. First clone the repository:
+
+```bash
+git clone https://github.com/IDAES/idaes-sdoe.git
+cd idaes-sdoe
+```
+
+Then install into a Conda environment:
 
 ```bash
 conda create -n idaes-sdoe python=3.11
@@ -21,59 +28,36 @@ conda activate idaes-sdoe
 pip install -e .
 ```
 
-Direct install into an existing environment:
+To use an existing environment, run only the `pip install -e .` step.
+
+### Optional extras
+
+Add extras in brackets to install optional tooling (combine as needed):
+
+- `notebook` — Jupyter Notebook
+- `marimo` — the marimo notebook interface
+- `docs` — Sphinx and the documentation theme (see [Development](#development))
+- `dev` — the test stack
+- `all-dev` — all of the above
 
 ```bash
-pip install -e .
+pip install -e ".[notebook,marimo]"   # e.g. both notebook interfaces
+pip install -e ".[all-dev]"           # everything for development
 ```
-
-Optional extras:
-
-```bash
-pip install -e ".[docs]"
-pip install -e ".[notebook]"
-pip install -e ".[marimo]"
-pip install -e ".[dev]"
-```
-
-Use `docs` for local documentation builds, `notebook` for Jupyter Notebook,
-`marimo` for the marimo notebook interface, and `dev` for the test stack. The
-`docs` extra installs Sphinx plus the HTML theme and code-block helpers used by
-the site.
 
 ### Notebook examples
 
-To install both notebook interfaces through the project extras:
-
-```bash
-conda activate idaes-sdoe
-pip install -e ".[notebook,marimo]"
-```
-
-Alternatively, after installing the project, install either interface
-directly into the Conda environment:
-
-```bash
-conda activate idaes-sdoe
-conda install -c conda-forge notebook ipykernel
-conda install -c conda-forge marimo
-```
-
-Launch the Jupyter example with:
+After installing the notebook extras, launch the Jupyter example:
 
 ```bash
 jupyter notebook examples/example-uniform-5d.ipynb
 ```
 
-Open the interactive marimo editor with:
+Open the interactive marimo notebook (`edit` for editable cells, `run` for the
+app view):
 
 ```bash
 marimo edit examples/example-uniform-5d-marimo.py
-```
-
-To serve the marimo notebook as a non-editable application instead:
-
-```bash
 marimo run examples/example-uniform-5d-marimo.py
 ```
 
@@ -132,12 +116,12 @@ The main public surface is split across `idaes_sdoe`, `idaes_sdoe.design`,
 
 ## Development
 
-Set up a development environment with the test and documentation extras:
+Set up a development environment with all developer extras:
 
 ```bash
 conda create -n idaes-sdoe python=3.11
 conda activate idaes-sdoe
-pip install -e ".[dev,docs]"
+pip install -e ".[all-dev]"
 ```
 
 Run the test suite:
